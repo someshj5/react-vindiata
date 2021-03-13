@@ -17,7 +17,7 @@ function App() {
           <Route exact path="/">
             <Auth />
           </Route>
-          <Route exact path="/employee">
+          <Route exact path="/tasks">
             <EmployeeList />
           </Route>
           <Route exact path="/register">

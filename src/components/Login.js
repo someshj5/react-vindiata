@@ -27,7 +27,7 @@ export default function Login() {
       if (response.data) {
         sessionStorage.setItem("__aT__", response.data);
         setIsFetching(false);
-        history.push("/");
+        history.push("/tasks");
       } else {
         setIsFetching(false);
       }

@@ -7,7 +7,7 @@ export default function Auth() {
   useEffect(() => {
     let token = sessionStorage.getItem("__aT__");
     if (token) {
-      history.push("/employee");
+      history.push("/tasks");
     } else {
       history.push("/login");
     }

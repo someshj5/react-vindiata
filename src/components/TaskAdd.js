@@ -125,39 +125,9 @@ export default function TaskAdd({ handleModalClose }) {
 
             <div class="form-group">
               <label class="col-md-4 control-label">Start Time</label>
-              {/* <div class="col-md-4 inputGroupContainer">
-                <div class="input-group">
-                  <span class="input-group-addon">
-                    <i class="glyphicon glyphicon-envelope"></i>
-                  </span>
-                  <input
-                    onChange={handleChange}
-                    value={"" && "".mobile}
-                    name="mobile"
-                    placeholder="mobile number"
-                    class="form-control"
-                    type="text"
-                  />
-                </div>
-              </div> */}
             </div>
             <div class="form-group">
               <label class="col-md-4 control-label">End Time</label>
-              {/* <div class="col-md-4 inputGroupContainer">
-                <div class="input-group">
-                  <span class="input-group-addon">
-                    <i class="glyphicon glyphicon-envelope"></i>
-                  </span>
-                  <input
-                    onChange={handleChange}
-                    value={"" && "".mobile}
-                    name="mobile"
-                    placeholder="mobile number"
-                    class="form-control"
-                    type="text"
-                  />
-                </div>
-              </div> */}
             </div>
             <div className="col-lg-6 login-btm login-button">
               <button type="submit" className="btn w-50 btn-outline-primary">
@@ -175,85 +145,3 @@ export default function TaskAdd({ handleModalClose }) {
     // </div>
   );
 }
-
-/* <option
-selected={
-  ("" && "".department) ||
-  null
-}
-value=""
->
-Select your Project
-</option>
-<option
-selected={
-  ("" && "".department) ||
-  null
-}
-value="Engineering"
->
-Department of Engineering
-</option>
-<option
-selected={
-  ("" && "".department) ||
-  null
-}
-value="Agriculture"
->
-Department of Agriculture
-</option>
-<option
-selected={
-  ("" && "".department) ||
-  null
-}
-value="Accounts"
->
-Accounting Office
-</option>
-<option
-selected={
-  ("" && "".department) ||
-  null
-}
-value="Tresurer"
->
-Tresurer's Office
-</option>
-<option
-selected={
-  ("" && "".department) ||
-  null
-}
-value="MPDC"
->
-MPDC
-</option>
-<option
-selected={
-  ("" && "".department) ||
-  null
-}
-value="MCTC"
->
-MCTC
-</option>
-<option
-selected={
-  ("" && "".department) ||
-  null
-}
-value="MCR"
->
-MCR
-</option>
-<option
-selected={
-  ("" && "".department) ||
-  null
-}
-value="Tourism"
->
-Tourism Office
-</option> */
