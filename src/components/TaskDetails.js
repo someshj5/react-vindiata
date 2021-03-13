@@ -44,7 +44,6 @@ export default function TaskDetails({ handleModalClose }) {
     let projectList = await getAllProjects(__aT__);
     if (projectList.data) {
       setProjects(projectList.data);
-      console.log(projectList.data, "projectList.data");
     }
   };
 
