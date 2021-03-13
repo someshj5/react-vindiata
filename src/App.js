@@ -3,8 +3,7 @@ import Login from "./components/Login";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Register from "./components/Register";
 import Auth from "./components/Auth";
-import EmployeeAdd from "./components/EmployeeAdd";
-import EmployeeList from "./components/EmployeeList";
+import TaskList from "./components/TaskList";
 
 function App() {
   return (
@@ -18,7 +17,7 @@ function App() {
             <Auth />
           </Route>
           <Route exact path="/tasks">
-            <EmployeeList />
+            <TaskList />
           </Route>
           <Route exact path="/register">
             <Register />
