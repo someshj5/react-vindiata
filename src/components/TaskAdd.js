@@ -1,27 +1,39 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { createTask, getAllProjects, updateTask } from "../service/taskService";
+<<<<<<< HEAD
 import DatePicker from "react-date-picker";
 import TimePicker from "react-time-picker";
+=======
+// import "react-datetime/css/react-datetime.css";
+>>>>>>> 874913ca76822e16504e7667a46525b42999f429
 
 export default function TaskAdd({ handleModalClose }) {
   const history = useHistory();
   let defaultFormValues = {
     name: "",
     project: "",
+<<<<<<< HEAD
     start_time: new Date(),
     end_time: new Date(),
+=======
+    start_time: "",
+    end_time: "",
+>>>>>>> 874913ca76822e16504e7667a46525b42999f429
     start: null,
     finish: null,
   };
   const [formValues, setFormValues] = useState(defaultFormValues);
   const [isFetching, setIsFetching] = useState(false);
   const [projects, setProjects] = useState([]);
+<<<<<<< HEAD
   let defaultValues = {
     start_time: new Date(),
     end_time: "",
   };
   const [dates, setDates] = useState({ defaultValues });
+=======
+>>>>>>> 874913ca76822e16504e7667a46525b42999f429
 
   const getProjectsList = async () => {
     const { __aT__ } = sessionStorage;
@@ -45,6 +57,7 @@ export default function TaskAdd({ handleModalClose }) {
       setIsFetching(true);
       e.preventDefault();
       const { __aT__ } = sessionStorage;
+<<<<<<< HEAD
       let task = {
         name: formValues.name,
         project: formValues.project,
@@ -60,6 +73,22 @@ export default function TaskAdd({ handleModalClose }) {
         setIsFetching(false);
         handleModalClose(resp);
         history.push("/tasks");
+=======
+      if ("" === null) {
+        const resp = await createTask(formValues, __aT__);
+        if (resp.data) {
+          setIsFetching(false);
+          handleModalClose(resp);
+          history.push("/employee");
+        }
+      } else if ("") {
+        const { id } = "";
+        const resp = await updateTask(formValues, id, __aT__);
+        if (resp.data) {
+          setIsFetching(false);
+          handleModalClose("updated");
+        }
+>>>>>>> 874913ca76822e16504e7667a46525b42999f429
       }
     } catch (error) {
       setIsFetching(false);
@@ -73,6 +102,7 @@ export default function TaskAdd({ handleModalClose }) {
     });
   };
 
+<<<<<<< HEAD
   const handleSelect = (e) => {
     setFormValues({
       ...formValues,
@@ -87,6 +117,8 @@ export default function TaskAdd({ handleModalClose }) {
     });
   };
 
+=======
+>>>>>>> 874913ca76822e16504e7667a46525b42999f429
   return (
     <div className="container-fluid p-5 bg-white">
       <div className="text-right" onClick={handleModalClose}>
@@ -108,7 +140,11 @@ export default function TaskAdd({ handleModalClose }) {
             </legend>
             <br />
             <div class="form-group">
+<<<<<<< HEAD
               <label class="col-md-4 control-label">Task name</label>
+=======
+              <label class="col-md-4 control-label">Start Time</label>
+>>>>>>> 874913ca76822e16504e7667a46525b42999f429
               <div class="col-md-4 inputGroupContainer">
                 <div class="input-group">
                   <span class="input-group-addon">
@@ -117,7 +153,11 @@ export default function TaskAdd({ handleModalClose }) {
                   <input
                     onChange={handleChange}
                     name="name"
+<<<<<<< HEAD
                     value={formValues.name}
+=======
+                    value={"" && "".name}
+>>>>>>> 874913ca76822e16504e7667a46525b42999f429
                     placeholder="task Name"
                     class="form-control"
                     type="text"
@@ -146,6 +186,7 @@ export default function TaskAdd({ handleModalClose }) {
 
             <div class="form-group">
               <label class="col-md-4 control-label">Start Time</label>
+<<<<<<< HEAD
               <div className="col-md-4 inputGroupContainer">
                 <DatePicker
                   onChange={handleSelect}
@@ -161,6 +202,11 @@ export default function TaskAdd({ handleModalClose }) {
                   value={formValues.end_time}
                 />
               </div>
+=======
+            </div>
+            <div class="form-group">
+              <label class="col-md-4 control-label">End Time</label>
+>>>>>>> 874913ca76822e16504e7667a46525b42999f429
             </div>
             <div className="col-lg-6 login-btm login-button">
               <button type="submit" className="btn w-50 btn-outline-primary">

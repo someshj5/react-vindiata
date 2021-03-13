@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
-import { useHistory } from "react-router";
+import { useHistory } from "react-router-dom";
 import { getAllTimeEntries } from "../service/taskService";
 import TaskAdd from "./TaskAdd";
 
