@@ -6,6 +6,8 @@ import { useHistory } from "react-router-dom";
 export default function Register() {
   const defaultFormValues = {
     email: "",
+    first_name:"",
+    last_name:"",
     username: "",
     password: "",
   };
@@ -52,6 +54,24 @@ export default function Register() {
             <div className="col-lg-12 login-form">
               <div className="col-lg-12 login-form">
                 <form onSubmit={handleSubmit}>
+                  <div className="form-group">
+                    <label className="form-control-label">FIRST NAME</label>
+                    <input
+                      onChange={handleChange}
+                      name="first_name"
+                      type="text"
+                      className="form-control"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label className="form-control-label">LAST NAME</label>
+                    <input
+                      onChange={handleChange}
+                      name="last_name"
+                      type="text"
+                      className="form-control"
+                    />
+                  </div>
                   <div className="form-group">
                     <label className="form-control-label">EMAIL</label>
                     <input

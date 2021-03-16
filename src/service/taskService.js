@@ -8,7 +8,10 @@ const getHeader = (token) => {
 };
 
 export const getAllTimeEntries = async (accessToken) => {
-  return await fetchGet(`${baseURL}/task-api/`, accessToken);
+  // return await fetchGet(`${baseURL}/task-api/`, accessToken);
+  return await axios.get(`${baseURL}/task-api/`, {
+    headers: getHeader(accessToken),
+  });
 };
 
 export const getAllProjects = async (accessToken) => {
@@ -27,17 +30,24 @@ export const getTaskById = async (id, accessToken) => {
   });
 };
 
-export const updateTask = async (task, id, accessToken) => {
+export const updateTask = async (id, task, accessToken) => {
   return await axios.put(
     `${baseURL}/task-api/task/${id}/`,
     task,
-    getHeader(accessToken)
+    { headers: { Authorization: accessToken } },
   );
 };
 
 export const deleteTask = async (id, accessToken) => {
   return await axios.delete(
     `${baseURL}/task-api/task/${id}/`,
-    getHeader(accessToken)
+    { headers: { Authorization: accessToken } },
+  );
+};
+
+export const fetchByDate = async (values, accessToken) => {
+  return await axios.post(
+    `${baseURL}/task-api/task-by-date`, values,
+    { headers: { Authorization: accessToken } },
   );
 };

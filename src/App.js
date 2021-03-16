@@ -4,8 +4,9 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Register from "./components/Register";
 import Auth from "./components/Auth";
 import TaskList from "./components/TaskList";
-import TaskAdd from "./components/TaskAdd";
 import TaskDetails from "./components/TaskDetails";
+import TaskAdd from "./components/TaskAdd";
+import TasksByDateRange from "./components/TasksByDateRange";
 
 function App() {
   return (
@@ -24,8 +25,14 @@ function App() {
           <Route exact path="/register">
             <Register />
           </Route>
+          <Route exact path="/task-add">
+            <TaskAdd />
+          </Route>
           <Route exact path="/task/:id">
             <TaskDetails />
+          </Route>
+          <Route exact path="/tasks-by-date">
+            <TasksByDateRange />
           </Route>
         </Switch>
       </Router>

@@ -8,25 +8,19 @@
     "@testing-library/user-event": "^12.8.1",
     "axios": "^0.21.1",
     "isomorphic-unfetch": "^3.1.0",
-<<<<<<< HEAD
     "moment": "^2.29.1",
     "moment-range": "^4.0.2",
     "react": "^17.0.1",
     "react-date-picker": "^8.1.0",
     "react-daterange-picker": "^2.0.1",
     "react-datetime-picker": "^3.2.0",
-=======
-    "react": "^17.0.1",
->>>>>>> 874913ca76822e16504e7667a46525b42999f429
     "react-dom": "^17.0.1",
     "react-modal": "^3.12.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
-<<<<<<< HEAD
     "react-time-picker": "^4.2.0",
+    "react-toastify": "^7.0.3",
     "snowflake-sdk": "^1.6.0",
-=======
->>>>>>> 874913ca76822e16504e7667a46525b42999f429
     "web-vitals": "^1.1.0"
   },
   "scripts": {

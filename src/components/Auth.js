@@ -11,6 +11,7 @@ export default function Auth() {
     } else {
       history.push("/login");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
