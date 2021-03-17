@@ -6,8 +6,8 @@ import { useHistory } from "react-router-dom";
 export default function Register() {
   const defaultFormValues = {
     email: "",
-    first_name:"",
-    last_name:"",
+    first_name: "",
+    last_name: "",
     username: "",
     password: "",
   };
@@ -77,7 +77,7 @@ export default function Register() {
                     <input
                       onChange={handleChange}
                       name="email"
-                      type="text"
+                      type="email"
                       className="form-control"
                     />
                   </div>

@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
 import { deleteTask, getAllTimeEntries } from "../service/taskService";
 
 export default function TaskList() {
   const history = useHistory();
   const { __aT__ } = sessionStorage;
   const [taskList, setTaskList] = useState([]);
-  const [modal, setModal] = useState(false);
-
   const [isFetching, setIsFetching] = useState(false);
+  const [deletemode, setDeletemode] = useState(false);
+
 
   const getTaskList = async () => {
     const resp = await getAllTimeEntries(__aT__);
@@ -19,16 +18,13 @@ export default function TaskList() {
     }
   };
 
-  const handleModal = (employee, e) => {
-    setModal(!modal);
-  };
 
   const handleDelete = async (e, id) => {
     try {
       setIsFetching(true)
+      setDeletemode(true)
       const response = await deleteTask(id, __aT__)
       if (response.data) {
-        alert("Deleted successfully")
         setIsFetching(false)
         setTimeout(() => {
           history.push('/tasks')
@@ -39,26 +35,7 @@ export default function TaskList() {
     }
 
   }
-  const customStyles = {
-    content: {
-      width: "100%",
-      top: "10%",
-      left: "0%",
-      right: "0%",
-      bottom: "10%",
-      height: "100%",
-    },
-  };
 
-  toast('🦄 Wow so easy!', {
-    position: "top-right",
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-  });
 
   const TasksArr =
     taskList.length > 0 &&
@@ -96,17 +73,25 @@ export default function TaskList() {
 
 
 
-  function handleModalClose(resp) {
-    setModal(false);
-    if (resp === "updated") {
-    }
-    if (resp) {
-      setIsFetching(false);
-    }
-  }
   const handleAdd = (e) => {
     history.push('/task-add')
   };
+
+  const handleFlush = () => {
+    sessionStorage.clear()
+    history.push('/')
+  }
+
+
+  useEffect(() => {
+    setTaskList([])
+    setTimeout(() => {
+      getTaskList();
+    }, 2000);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [deletemode]);
+
+
 
   return (
     <div>
@@ -131,6 +116,13 @@ export default function TaskList() {
           >
             List by Date
           </button>
+          <button
+            disabled={!__aT__}
+            onClick={handleFlush}
+            className="btn btn-outline-danger mx-2"
+          >
+            Logout
+          </button>
         </span>
       </div>
 
@@ -153,8 +145,9 @@ export default function TaskList() {
         </thead>
         <tbody>
           {__aT__ && taskList.length > 0 ? TasksArr
-            : <td>Sorry no data </td>
+            : <tr><td>Sorry no data </td></tr>
           }
+          {isFetching && <h2>Please wait</h2>}
         </tbody>
       </table>
     </div>

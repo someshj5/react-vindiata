@@ -69,7 +69,7 @@ export default function TasksByDateRange() {
                 </div>
 
             </div>
-            {taskList.length > 0 && (
+            {taskList.length > 0 ? (
                 <table className="container">
                     <thead>
                         <tr>
@@ -88,7 +88,7 @@ export default function TasksByDateRange() {
                         {TasksArr}
                     </tbody>
                 </table>
-            ) || (<h2 className="mt-5">Sorry no data </h2>)}
+            ) : (<h1 className="mt-5">Sorry no data </h1>)}
         </>
     )
 }

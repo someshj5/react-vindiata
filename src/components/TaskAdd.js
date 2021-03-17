@@ -3,7 +3,7 @@ import { useHistory } from "react-router";
 import { createTask, getAllProjects } from "../service/taskService";
 import DatePicker from "react-date-picker";
 
-export default function TaskAdd({ }) {
+export default function TaskAdd() {
   const history = useHistory();
   let defaultFormValues = {
     name: "",
@@ -58,9 +58,9 @@ export default function TaskAdd({ }) {
         setTimeout(() => {
           history.push("/tasks");
         }, 2000);
-        setIsFetching(false);
+        // setIsFetching(false);
         // handleModalClose(resp);
-  
+
       }
     } catch (error) {
       setIsFetching(false);

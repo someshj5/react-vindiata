@@ -9,14 +9,15 @@ import DatePicker from "react-date-picker";
 // import TimePicker from "react-time-picker";
 import moment from 'moment'
 
-export default function TaskDetails({ handleModalClose }) {
+export default function TaskDetails() {
   const [task, setTask] = useState(null);
   const history = useHistory();
   const params = useParams();
 
   const [isFetching, setIsFetching] = useState(false);
   const [projects, setProjects] = useState([]);
-  const [taskETA,setTaskETA] = useState({started:null,finished:null})
+  const [started, setStarted] = useState(null)
+  const [finished, setFinished] = useState(null)
 
   const getTask = async () => {
     const { __aT__ } = sessionStorage;
@@ -26,6 +27,8 @@ export default function TaskDetails({ handleModalClose }) {
       let response = await getTaskById(id, __aT__);
       if (response.data) {
         setTask(response.data.data);
+        setStarted(response.data.data.start)
+        setFinished(response.data.data.finish)
         setIsFetching(false);
       }
     } catch (error) {
@@ -41,9 +44,9 @@ export default function TaskDetails({ handleModalClose }) {
     }
   };
 
-  const projectsArr = projects.map((proj,idx) => {
-    return <option key={idx} value={proj[0]} 
-     >{proj[1]}</option>;
+  const projectsArr = projects.map((proj, idx) => {
+    return <option key={idx} value={proj[0]}
+    >{proj[1]}</option>;
   });
 
   useEffect(() => {
@@ -63,43 +66,40 @@ export default function TaskDetails({ handleModalClose }) {
 
   const [formValues, setFormValues] = useState(defaultFormValues);
 
+  const handleStart = () => {
+    console.log(task.start, 'handlestart')
+    setStarted(new Date().toISOString())
+  }
+
+  const handleFinish = () => {
+    console.log(started, 'handleFinish')
+    setFinished(new Date().toISOString())
+  }
+
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      console.log(formValues,'formValues')
-      const {id} = task
-      console.log(id,task)
-
+      // console.log(formValues, 'formValues')
+      const { id } = task
+      console.log(id, task)
       setIsFetching(true);
-      if (task.start === null ){
-        setTaskETA({...taskETA,
-          started:new Date().toISOString()
-        })
-      }
-      else if (task.start !== null){
-        setTaskETA({
-          ...taskETA,
-          finished:new Date().toISOString()
-        })
-      }
       const { __aT__ } = sessionStorage;
       let taskValues = {
-        name: task &&task.name,
+        name: task && task.name,
         project: task && task.project,
         start_time: task && task.start_time,
         end_time: task && task.end_time,
         created_at: task && task.created_at,
-        start: taskETA.started,
-        finish: taskETA.finished,
+        start: started,
+        finish: finished,
       };
-      console.log(taskValues, taskETA,'taskValues')
-      const resp = await updateTask(id,taskValues, __aT__);
+      const resp = await updateTask(id, taskValues, __aT__);
       if (resp.data) {
         setIsFetching(false);
         // handleModalClose(resp);
         setTimeout(() => {
           history.push("/tasks");
-          
+
         }, 2000);
       }
     } catch (error) {
@@ -114,81 +114,101 @@ export default function TaskDetails({ handleModalClose }) {
     });
   };
 
+  // useEffect(() => {
+  // })
 
   return (
     <div className="container bg-white p-5 ">
       <div className="container  pt-3 px-3 mb-5 ">
+
         {(!isFetching && (
-            <fieldset>
-              <legend>
-                <center>
-                  <h2>
-                    <b>Task Details</b>
-                  </h2>
-                </center>
-              </legend>
-              <br />
-              <div className="form-group">
-                <label className="col-md-4 control-label">Task name</label>
-                <div className="col-md-4 inputGroupContainer">
-                  <div className="input-group">
-                    <input
-                      onChange={handleChange}
-                      name="name"
-                      value={(task && task.name) || ""}
-                      placeholder="task Name"
-                      className="form-control"
-                      type="text"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className="form-group">
-                <label className="col-md-4 control-label">Projects</label>
-                <div className="col-md-4 selectContainer">
-                  <div className="input-group">
-                    <select
-                      onChange={handleChange}
-                      name="project"
-                      className="form-control selectpicker"
-                      defaultValue={task && task.project}
-                    >
-                      {projectsArr && projectsArr}
-                    </select>
-                  </div>
-                </div>
-              </div>
-
-              <div className="form-group">
-                <label className="col-md-4 control-label">Start Time</label>
-                <div className="col-md-4 inputGroupContainer">
-                  <DatePicker
-                    // onChange={handleSelect}
-                    value={task && moment(task.start_time, 'YYYY-MM-DD') }
-                    disabled
+          <fieldset>
+            <legend>
+              <center>
+                <h2>
+                  <b>Task Details</b>
+                </h2>
+              </center>
+            </legend>
+            <br />
+            <div className="form-group">
+              <label className="col-md-4 control-label">Task name</label>
+              <div className="col-md-4 inputGroupContainer">
+                <div className="input-group">
+                  <input
+                    onChange={handleChange}
+                    name="name"
+                    value={(task && task.name) || ""}
+                    placeholder="task Name"
+                    className="form-control"
+                    type="text"
                   />
                 </div>
               </div>
-              <div className="form-group">
-                <label className="col-md-4 control-label">End Time</label>
-                <div className="col-md-4 inputGroupContainer">
-                  <DatePicker
-                    // onChange={handleEndTime}
-                    value={task && moment(task.end_time, 'YYYY-MM-DD')}
-                    disabled
-                  />
+            </div>
+
+            <div className="form-group">
+              <label className="col-md-4 control-label">Projects</label>
+              <div className="col-md-4 selectContainer">
+                <div className="input-group">
+                  <select
+                    onChange={handleChange}
+                    name="project"
+                    className="form-control selectpicker"
+                    defaultValue={task && task.project}
+                  >
+                    {projectsArr && projectsArr}
+                  </select>
                 </div>
               </div>
-              <div className="col-lg-6 login-btm login-button">
-                <button onClick={handleSubmit} type="submit" className="btn w-50 btn-outline-primary">
-                  {task && task.start === null ? "Start" : "Finish"}
-                </button> 
+            </div>
+
+            <div className="form-group">
+              <label className="col-md-4 control-label">Start Time</label>
+              <div className="col-md-4 inputGroupContainer">
+                <DatePicker
+                  // onChange={handleSelect}
+                  value={task && moment(task.start_time, 'YYYY-MM-DD')}
+                  disabled
+                />
               </div>
-              <div className="form-group">
-                <label className="col-md-4 control-label"></label>
+            </div>
+            <div className="form-group">
+              <label className="col-md-4 control-label">End Time</label>
+              <div className="col-md-4 inputGroupContainer">
+                <DatePicker
+                  // onChange={handleEndTime}
+                  value={task && moment(task.end_time, 'YYYY-MM-DD')}
+                  disabled
+                />
               </div>
-            </fieldset>
+            </div>
+            <div className="col-lg-6 login-btm login-button">
+              {task && (
+                <span>
+                  <button disabled={task && task.start} onClick={handleStart} type="submit" className="btn w-50 btn-outline-primary">
+                    {"Start"}
+                  </button>
+                </span>
+              )}
+
+              {task && (
+                <span>
+                  <button disabled={task && task.finish} onClick={handleFinish} type="submit" className="btn w-50 btn-outline-primary">
+                    {"Finish"}
+                  </button>
+                </span>
+              )}
+            </div>
+
+            <div className="form-group">
+              <div>
+                <button disabled={task && task.start && task.finish} onClick={handleSubmit} type="submit" className="mx-1 btn w-50 btn-outline-primary">
+                  {'Update'}
+                </button>
+              </div>
+            </div>
+          </fieldset>
           // </form>
         )) || <div className="container-fluid">"Please wait "</div>}
       </div>
