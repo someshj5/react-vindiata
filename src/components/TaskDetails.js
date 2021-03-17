@@ -67,21 +67,17 @@ export default function TaskDetails() {
   const [formValues, setFormValues] = useState(defaultFormValues);
 
   const handleStart = () => {
-    console.log(task.start, 'handlestart')
     setStarted(new Date().toISOString())
   }
 
   const handleFinish = () => {
-    console.log(started, 'handleFinish')
     setFinished(new Date().toISOString())
   }
 
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      // console.log(formValues, 'formValues')
       const { id } = task
-      console.log(id, task)
       setIsFetching(true);
       const { __aT__ } = sessionStorage;
       let taskValues = {

@@ -26,7 +26,6 @@ export default function TasksByDateRange() {
         taskList.map((task, idx) => {
             let name = task.name
             let project = task.project
-            console.log(task.start_time, 'task.start_time')
             let created = new Date(task.start_time).toString()
             return (
                 <tr key={idx}>
